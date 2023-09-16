@@ -4,18 +4,21 @@ import SearchBar from '../components/search';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ImageMsg from '../lib/image_message';
 import Image from '../components/image';
+import ZeroResult from '../components/no-result';
+import Loading from '../components/loading';
 
 export default function SearchPage(){
     const [imgData, setImageData] = useState([]);
     const [totalDataLength, setTotalDataLength] = useState(0);
-    const [query, setQuery] = useState("dogs");
+    const [query, setQuery] = useState("");
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
+    const [zeroResult, setZeroResult] = useState(false);
     const pixabay = new PixabayAPI();
 
     useEffect(()=>{
         (async () => {
-        const {images, total} = await pixabay.search("dogs", false);
+        const {images, total} = await pixabay.search("", false);
         setImageData(images)
         setTotalDataLength(total);
         })();
@@ -31,6 +34,11 @@ export default function SearchPage(){
         const {images, total} = await pixabay.search(query, false);
         setImageData(images)
         setTotalDataLength(total);
+        if(images.length == 0){
+            setZeroResult(true);
+        } else {
+            setZeroResult(false);
+        }
         })();
     }
     return (
@@ -47,6 +55,11 @@ export default function SearchPage(){
                         console.log(images.length)
                         setImageData((prevData) => prevData.concat(images))
                         setPage((prevPage)=> prevPage+1);
+                        if(images.length == 0){
+                            setZeroResult(true);
+                        } else{
+                            setZeroResult(false);
+                        }
                     }).catch((e)=>{
                         console.log(e);
                     })
@@ -55,14 +68,14 @@ export default function SearchPage(){
                     }   
                 }}
                 hasMore = {hasMore}
-                loader = {<p>Loading...</p>}
+                loader = {zeroResult ? <ZeroResult query={query}/> : <Loading/>}
             >
-                {imgData && imgData.map((img: ImageMsg, i: number)=>{
-                if (i < imgData.length - (imgData.length % 3)){
-                    return (<Image key={img.id} imgMsg={img}/>);
-                }
-                })}
-            </InfiniteScroll>        
+                {imgData.map((img: ImageMsg, i: number)=>{
+                        if (i < imgData.length - (imgData.length % 3)){
+                            return (<Image key={img.id} imgMsg={img}/>);
+                        }})}
+            </InfiniteScroll>
+                    
         </div>
         </>
     )
