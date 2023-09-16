@@ -38,24 +38,24 @@ export default function SearchPage(){
         <SearchBar onChange={handleQuery} />
         <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
             <InfiniteScroll 
-            className='grid grid-cols-2 gap-4 sm:grid-cols-4 md:gap-6 xl:gap-8'
-            dataLength={imgData.length} 
-            next={()=> {
-                if(imgData.length < totalDataLength){
-                console.log("infinite")
-                pixabay.search(query, false, page).then(({images})=>{
-                    console.log(images.length)
-                    setImageData((prevData) => prevData.concat(images))
-                    setPage((prevPage)=> prevPage+1);
-                }).catch((e)=>{
-                    console.log(e);
-                })
-                } else {
-                setHasMore(false);
-                }   
-            }}
-            hasMore = {hasMore}
-            loader = {<p>Loading...</p>}
+                className='grid grid-cols-2 gap-4 sm:grid-cols-4 md:gap-6 xl:gap-8'
+                dataLength={imgData.length} 
+                next={()=> {
+                    if(imgData.length < totalDataLength){
+                    console.log("infinite")
+                    pixabay.search(query, false, page).then(({images})=>{
+                        console.log(images.length)
+                        setImageData((prevData) => prevData.concat(images))
+                        setPage((prevPage)=> prevPage+1);
+                    }).catch((e)=>{
+                        console.log(e);
+                    })
+                    } else {
+                    setHasMore(false);
+                    }   
+                }}
+                hasMore = {hasMore}
+                loader = {<p>Loading...</p>}
             >
                 {imgData && imgData.map((img: ImageMsg, i: number)=>{
                 if (i < imgData.length - (imgData.length % 3)){
