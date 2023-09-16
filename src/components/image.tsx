@@ -1,9 +1,9 @@
 import {PiDownloadSimpleBold} from 'react-icons/pi'
 import {BsFillSuitHeartFill} from 'react-icons/bs'
 
-export default function Image({imgURL, views, likes}:{imgURL:string, views:number, likes:number}){
+export default function Image({imgURL, likes, id}:{imgURL:string, likes:number, id:string}){
     return (
-        <a href="#" className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
+        <a href={`/image?id=${id}`} className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
             <img src={imgURL} 
             loading="lazy" 
             className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
