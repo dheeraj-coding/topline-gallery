@@ -6,6 +6,7 @@ import ImageMsg from '../lib/image_message';
 import Image from '../components/image';
 import ZeroResult from '../components/no-result';
 import Loading from '../components/loading';
+import ScrollTop from '../components/top-button';
 
 export default function SearchPage(){
     const [imgData, setImageData] = useState([]);
@@ -50,25 +51,24 @@ export default function SearchPage(){
                 dataLength={imgData.length} 
                 next={()=> {
                     if(imgData.length < totalDataLength){
-                    console.log("infinite")
-                    pixabay.search(query, false, page).then(({images})=>{
-                        console.log(images.length)
-                        setImageData((prevData) => prevData.concat(images))
-                        setPage((prevPage)=> prevPage+1);
-                        if(images.length == 0){
-                            setZeroResult(true);
-                        } else{
-                            setZeroResult(false);
-                        }
-                    }).catch((e)=>{
-                        console.log(e);
-                    })
+                        pixabay.search(query, false, page).then(({images})=>{
+                            setImageData((prevData) => prevData.concat(images))
+                            setPage((prevPage)=> prevPage+1);
+                            if(images.length == 0){
+                                setZeroResult(true);
+                            } else{
+                                setZeroResult(false);
+                            }
+                        }).catch((e)=>{
+                            console.log(e);
+                        })
                     } else {
-                    setHasMore(false);
+                        setHasMore(false);
                     }   
                 }}
                 hasMore = {hasMore}
                 loader = {zeroResult ? <ZeroResult query={query}/> : <Loading/>}
+                endMessage = {<p>Ended!</p>}
             >
                 {imgData.map((img: ImageMsg, i: number)=>{
                         if (i < imgData.length - (imgData.length % 3)){
@@ -77,6 +77,7 @@ export default function SearchPage(){
             </InfiniteScroll>
                     
         </div>
+        <ScrollTop />
         </>
     )
 }
