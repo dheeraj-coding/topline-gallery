@@ -13,8 +13,7 @@ import ImageDetails from './pages/image-details';
 function App() {
   
   return (
-    <div className="bg-white py-6 sm:py-8 lg:py-12">
-      
+    <div className="h-screen py-6 sm:py-8 lg:py-12">
       <Routes>
         <Route path="/" element={<SearchPage/>}/>
         <Route path="/image" element={<ImageDetails />} />
