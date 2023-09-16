@@ -45,9 +45,9 @@ export default function SearchPage(){
     return (
         <>
         <SearchBar onChange={handleQuery} />
-        <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
+        <div className='flex-1 overflow-y-auto mx-auto max-w-screen-2xl px-4 md:px-8'>
             <InfiniteScroll 
-                className='grid grid-cols-2 gap-4 sm:grid-cols-4 md:gap-6 xl:gap-8'
+                className='grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4 md:gap-6 xl:gap-8'
                 dataLength={imgData.length} 
                 next={()=> {
                     if(imgData.length < totalDataLength){

@@ -13,7 +13,10 @@ import ImageDetails from './pages/image-details';
 function App() {
   
   return (
-    <div className="h-screen py-6 sm:py-8 lg:py-12">
+    <div className="h-screen">
+      <header className="fixed text-slate-800 font-fira-sans text-2xl w-full py-5 -top-2 z-50 bg-orange-300 text-center">
+        Picasso
+      </header>
       <Routes>
         <Route path="/" element={<SearchPage/>}/>
         <Route path="/image" element={<ImageDetails />} />
