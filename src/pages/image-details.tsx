@@ -20,7 +20,7 @@ export default function ImageDetails(){
 
     }
     return (
-        <div className="h-screen mx-auto max-w-screen-2xl px-4 md:px-8">
+        <div className="h-screen mt-28 mx-auto max-w-screen-2xl px-4 md:px-8">
             <div className="shadow-lg shadow-orange-500 flex flex-col h-full  md:h-4/5 items-center bg-white border rounded-lg md:flex-row dark:bg-slate-600">
                 <img className="object-cover rounded-t-lg h-full md:w-4/5 md:rounded-none md:rounded-l-lg" src={imgMsg.imgURL} />
                 <div className="flex flex-col items-center m-auto py-20">
