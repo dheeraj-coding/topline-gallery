@@ -7,6 +7,8 @@ export default class ImageMsg {
     readonly LG_IMG_KEY = "largeImageURL";
     readonly USER_KEY = "user";
     readonly USER_IMG_KEY = "userImageURL";
+    readonly LIKES_KEY = "likes";
+    readonly VIEWS_KEY = "views";
 
     id: string;
     tags: string[];
@@ -16,6 +18,8 @@ export default class ImageMsg {
     lgImgURL: string;
     userName: string;
     userImgURL: string;
+    likes: number;
+    views: number;
     constructor(resultEntry: Record<string, string>){
         this.id = resultEntry[this.ID_KEY];
         this.tags = resultEntry[this.TAG_KEY].split(",").map((val)=> val.trim());
@@ -25,5 +29,7 @@ export default class ImageMsg {
         this.lgImgURL = resultEntry[this.LG_IMG_KEY];
         this.userName = resultEntry[this.USER_KEY];
         this.userImgURL = resultEntry[this.USER_IMG_KEY];
+        this.likes = parseInt(resultEntry[this.LIKES_KEY]);
+        this.views = parseInt(resultEntry[this.VIEWS_KEY]);
     }
 }

@@ -18,8 +18,6 @@ function App() {
   useEffect(()=>{
     (async () => {
       const {images, total} = await pixabay.search("dogs", false);
-      console.log("Hello");
-      console.log(total);
       setImageData(images)
       setTotalDataLength(total);
     })();
@@ -31,7 +29,7 @@ function App() {
       <SearchBar />
       <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
         <InfiniteScroll 
-          className='grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8'
+          className='grid grid-cols-2 gap-4 sm:grid-cols-4 md:gap-6 xl:gap-8'
           dataLength={imgData.length} 
           next={()=> {
             if(imgData.length < totalDataLength){
@@ -52,7 +50,7 @@ function App() {
         >
             {imgData && imgData.map((img: ImageMsg, i: number)=>{
               if (i < imgData.length - (imgData.length % 3)){
-                return (<Image key={img.id} imgURL={img.previewImgURL} />);
+                return (<Image key={img.id} views={img.views} likes={img.likes} imgURL={img.previewImgURL} />);
               }
             })}
         </InfiniteScroll>        
