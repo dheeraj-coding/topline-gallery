@@ -1,15 +1,16 @@
+const ID_KEY = "id";
+const TAG_KEY = "tags";
+const WEB_IMG_KEY = "webformatURL";
+const WEB_IMG_HEIGHT_KEY = "webformatHeight";
+const WEB_IMG_WIDTH_KEY = "webformatWidth";
+const LG_IMG_KEY = "largeImageURL";
+const USER_KEY = "user";
+const USER_IMG_KEY = "userImageURL";
+const LIKES_KEY = "likes";
+const VIEWS_KEY = "views";
+const USER_ID_KEY = "user_id";
+
 export default class ImageMsg {
-    readonly ID_KEY = "id";
-    readonly TAG_KEY = "tags";
-    readonly WEB_IMG_KEY = "webformatURL";
-    readonly WEB_IMG_HEIGHT_KEY = "webformatHeight";
-    readonly WEB_IMG_WIDTH_KEY = "webformatWidth";
-    readonly LG_IMG_KEY = "largeImageURL";
-    readonly USER_KEY = "user";
-    readonly USER_IMG_KEY = "userImageURL";
-    readonly LIKES_KEY = "likes";
-    readonly VIEWS_KEY = "views";
-    readonly USER_ID_KEY = "user_id";
 
     id: string;
     tags: string[];
@@ -23,16 +24,19 @@ export default class ImageMsg {
     views: number;
     userID: string;
     constructor(resultEntry: Record<string, string>){
-        this.id = resultEntry[this.ID_KEY];
-        this.tags = resultEntry[this.TAG_KEY].split(",").map((val)=> val.trim());
-        this.previewImgURL = resultEntry[this.WEB_IMG_KEY];
-        this.previewImgHeight = parseInt(resultEntry[this.WEB_IMG_HEIGHT_KEY]);
-        this.previewImgWidth = parseInt(resultEntry[this.WEB_IMG_WIDTH_KEY]);
-        this.lgImgURL = resultEntry[this.LG_IMG_KEY];
-        this.userName = resultEntry[this.USER_KEY];
-        this.userImgURL = resultEntry[this.USER_IMG_KEY];
-        this.likes = parseInt(resultEntry[this.LIKES_KEY]);
-        this.views = parseInt(resultEntry[this.VIEWS_KEY]);
-        this.userID = resultEntry[this.USER_ID_KEY];
+        this.id = resultEntry[ID_KEY];
+        this.tags = resultEntry[TAG_KEY].split(",").map((val)=> val.trim());
+        this.previewImgURL = resultEntry[WEB_IMG_KEY];
+        this.previewImgHeight = parseInt(resultEntry[WEB_IMG_HEIGHT_KEY]);
+        this.previewImgWidth = parseInt(resultEntry[WEB_IMG_WIDTH_KEY]);
+        this.lgImgURL = resultEntry[LG_IMG_KEY];
+        this.userName = resultEntry[USER_KEY];
+        this.userImgURL = resultEntry[USER_IMG_KEY];
+        this.likes = parseInt(resultEntry[LIKES_KEY]);
+        this.views = parseInt(resultEntry[VIEWS_KEY]);
+        this.userID = resultEntry[USER_ID_KEY];
+
+        const cacheImgData = {userName: this.userName, userImgURL: this.userImgURL, imgURL: this.lgImgURL, tags: this.tags};
+        localStorage.setItem(this.id, JSON.stringify(cacheImgData));
     }
 }

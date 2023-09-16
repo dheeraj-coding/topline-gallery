@@ -59,7 +59,7 @@ export default function SearchPage(){
             >
                 {imgData && imgData.map((img: ImageMsg, i: number)=>{
                 if (i < imgData.length - (imgData.length % 3)){
-                    return (<Image key={img.id} id={img.id} likes={img.likes} imgURL={img.previewImgURL} />);
+                    return (<Image key={img.id} imgMsg={img}/>);
                 }
                 })}
             </InfiniteScroll>        

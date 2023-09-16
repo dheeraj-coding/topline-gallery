@@ -9,8 +9,8 @@ function useQuery() {
 
 export default function ImageDetails(){
     let query = useQuery();
-    console.log(query.get("id"))
+    const id = query.get("id")
     return (
-        <p>image details</p>
+        <p>{id && localStorage.getItem(id)}</p>
     )
 }
